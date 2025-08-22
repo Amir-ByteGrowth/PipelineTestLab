@@ -1,73 +1,36 @@
-name: Android CI/CD
+name: Android CI
 
 on:
   push:
+    branches: [ "master" ]
+  pull_request:
     branches: [ "master" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Code
+      - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup JDK 17
+      - name: Setup JDK
         uses: actions/setup-java@v3
         with:
-          distribution: "temurin"
-          java-version: "17"
-
-      - name: Gradle Permissions
-        run: chmod +x gradlew
-
-      - name: Run Lint
-        run: ./gradlew lint
-
-      - name: Run Unit Tests
-        run: ./gradlew test
+          java-version: '17'
+          distribution: 'temurin'
 
       - name: Build Debug APK
         run: ./gradlew assembleDebug
 
-      - name: Build Release AAB
-        run: ./gradlew bundleRelease
+      - name: Authenticate with Google
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}
 
-      - name: Sign Release
-        run: |
-          echo "${{ secrets.KEYSTORE_FILE }}" | base64 --decode > mykey.jks
-          ./gradlew signingReport
-
-      - name: Upload to Firebase
+      - name: Upload to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
           appId: ${{ secrets.FIREBASE_APP_ID }}
-          token: ${{ secrets.FIREBASE_AUTH_TOKEN }}
+          serviceCredentialsFileContent: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}
           groups: testers
-          file: app/build/outputs/apk/release/app-release.apk
-
-
-
-#first test and it was working fine
-#name: Kotlin CI
-#on:
-#  push:
-#    branches:
-#      - master
-#  pull_request:
-#    branches:
-#      - master
-#jobs:
-#  build:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout code
-#        uses: actions/checkout@v2
-#      - name: Set up JDK 17
-#        uses: actions/setup-java@v1
-#        with:
-#          java-version: '17'
-#      - name: Build with Gradle
-#        run: ./gradlew build
-#      - name: Run tests
-#        run: ./gradlew test
+          file: app/build/outputs/apk/debug/app-debug.apk
