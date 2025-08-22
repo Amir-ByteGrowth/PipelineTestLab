@@ -8,4 +8,5 @@ import com.pipeline.testlab.baseclasses.BaseViewModel
  */
 class SharedViewModel : BaseViewModel() {
 // we will use this to share data between fragments
+
 }
