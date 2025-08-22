@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.baseproject2025.ui.activity.MainViewModel" />
+            type="com.pipeline.testlab.ui.activity.MainViewModel" />
 
     </data>
 

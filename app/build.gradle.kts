@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.baseproject2025"
+    namespace = "com.pipeline.testlab"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.example.baseproject2025"
+        applicationId = "com.pipeline.testlab"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1
