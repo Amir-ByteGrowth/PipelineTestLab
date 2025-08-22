@@ -21,6 +21,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "MVVMBaseProject2025"
+rootProject.name = "PipelineTestLab"
 include(":app")
  
