@@ -18,6 +18,8 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 
 @AndroidEntryPoint
 class FirstFragment : BaseFragment<FirstFragmentBinding, FirstViewModel>() {
@@ -83,16 +85,7 @@ class FirstFragment : BaseFragment<FirstFragmentBinding, FirstViewModel>() {
 
     private fun initialising() {
 
-        adapter = PostsRecyclerAdapter(postsList, object : PostsRecyclerAdapter.ClickItemListener {
-            override fun onClicked(position: Int) {
-//                Navigation.findNavController(mViewDataBinding.recyclerPosts)
-//                    .navigate(R.id.action_firstFragment_to_secondFragment)
-            }
-
-            override fun onProductLiked(position: Int, isLiked: Boolean) {
-            }
-
-        })
+        adapter = PostsRecyclerAdapter(postsList)
 
         mViewDataBinding.recyclerPosts.layoutManager = LinearLayoutManager(requireContext())
         mViewDataBinding.recyclerPosts.adapter = adapter
@@ -102,7 +95,7 @@ class FirstFragment : BaseFragment<FirstFragmentBinding, FirstViewModel>() {
     override fun subscribeToNavigationLiveData() {
         super.subscribeToNavigationLiveData()
         mViewDataBinding.btn.setOnClickListener {
-            Navigation.findNavController(mViewDataBinding.recyclerPosts)
+            findNavController()
                 .navigate(R.id.action_firstFragment_to_secondFragment)
         }
     }

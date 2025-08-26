@@ -12,7 +12,7 @@ import com.pipeline.testlab.data.models.PostsResponseItem
 
 class PostsRecyclerAdapter(
     val list: List<PostsResponseItem>,
-    private val listener: ClickItemListener
+    private val listener: ClickItemListener? = null
 ) :
     RecyclerView.Adapter<PostsRecyclerAdapter.PostsViewHolder>() {
 
@@ -64,9 +64,9 @@ class PostsRecyclerAdapter(
             tv_body?.text = "Body : " + post.body
             tv_title?.text = "Title : " + post.title
 
-            linearlayout!!.setOnClickListener { listener.onClicked(position) }
+            linearlayout!!.setOnClickListener { listener?.onClicked(position) }
 
-            mLikeButton!!.setOnClickListener { listener.onProductLiked(position, true) }
+            mLikeButton!!.setOnClickListener { listener?.onProductLiked(position, true) }
         }
 
     }
