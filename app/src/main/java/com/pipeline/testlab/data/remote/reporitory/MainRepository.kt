@@ -2,6 +2,7 @@ package com.pipeline.testlab.data.remote.reporitory
 
 import com.pipeline.testlab.data.local.db.AppDao
 import com.pipeline.testlab.data.models.PostsResponse
+import com.pipeline.testlab.data.models.PostsResponseItem
 import com.pipeline.testlab.data.remote.ApiService
 import com.pipeline.testlab.data.remote.Resource
 import javax.inject.Inject
@@ -26,6 +27,13 @@ class MainRepository @Inject constructor(
             }
             return Resource.error(response.message(), null)
 
+        }
+
+    }
+
+    suspend fun getPostsFromDb(): List<PostsResponseItem> {
+        localDataSource.getAllMovies().let {
+            return it
         }
 
     }

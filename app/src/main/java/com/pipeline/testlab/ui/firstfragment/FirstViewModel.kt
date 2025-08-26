@@ -43,8 +43,5 @@ class FirstViewModel @Inject constructor(
         }
     }
 
-    fun onClick() {
-        btnClick.call()
-    }
 
 }

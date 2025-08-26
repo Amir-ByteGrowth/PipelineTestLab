@@ -18,9 +18,11 @@
             android:id="@+id/recycler_posts"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/ed" />
+            android:layout_above="@+id/btn"
+            android:layout_marginBottom="@dimen/_10sdp" />
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/tv_myName"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
@@ -29,6 +31,7 @@
             android:text="@{viewModel.myName}" />
 
         <EditText
+            android:visibility="gone"
             android:id="@+id/ed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,12 +42,14 @@
             android:text="@={viewModel.myedittext}" />
 
         <Button
+            android:layout_width="0dp"
             android:id="@+id/btn"
-            android:layout_width="150dp"
-            android:layout_height="45dp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:layout_above="@+id/tv_myName"
             android:layout_alignParentEnd="true"
-            android:onClick="@{() -> viewModel.onClick()}"
             android:text="Save" />
 
     </RelativeLayout>

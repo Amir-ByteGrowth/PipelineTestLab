@@ -85,8 +85,8 @@ class FirstFragment : BaseFragment<FirstFragmentBinding, FirstViewModel>() {
 
         adapter = PostsRecyclerAdapter(postsList, object : PostsRecyclerAdapter.ClickItemListener {
             override fun onClicked(position: Int) {
-                Navigation.findNavController(mViewDataBinding.recyclerPosts)
-                    .navigate(R.id.action_firstFragment_to_secondFragment)
+//                Navigation.findNavController(mViewDataBinding.recyclerPosts)
+//                    .navigate(R.id.action_firstFragment_to_secondFragment)
             }
 
             override fun onProductLiked(position: Int, isLiked: Boolean) {
@@ -98,6 +98,15 @@ class FirstFragment : BaseFragment<FirstFragmentBinding, FirstViewModel>() {
         mViewDataBinding.recyclerPosts.adapter = adapter
 
     }
+
+    override fun subscribeToNavigationLiveData() {
+        super.subscribeToNavigationLiveData()
+        mViewDataBinding.btn.setOnClickListener {
+            Navigation.findNavController(mViewDataBinding.recyclerPosts)
+                .navigate(R.id.action_firstFragment_to_secondFragment)
+        }
+    }
+
 
     //subscribing to network live data
     override fun subscribeToNetworkLiveData() {
