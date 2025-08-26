@@ -36,10 +36,9 @@ class FirstViewModel @Inject constructor(
             _posts.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 mainRepository.getPosts().let {
-                    if (it.isSuccessful) {
-                        _posts.postValue(Resource.success(it.body()!!))
-                    } else _posts.postValue(Resource.error(it.message(), null))
+                    _posts.postValue(it)
                 }
+
             } else _posts.postValue(Resource.error("No internet connection", null))
         }
     }
