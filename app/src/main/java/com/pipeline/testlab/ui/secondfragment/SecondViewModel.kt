@@ -25,8 +25,8 @@ class SecondViewModel @Inject constructor(
         viewModelScope.launch {
             _posts.postValue(Resource.loading(null))
             delay(2000)
-            mainRepository.getPosts().let {
-                _posts.postValue(it)
+            mainRepository.getPostsFromDb().let {
+                _posts.postValue(Resource.success(PostsResponse().apply { addAll(it) }))
             }
 
 
